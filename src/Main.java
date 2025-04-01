@@ -1,72 +1,70 @@
 import java.util.*;
 
-class Question {
-    private String questionText;
-    private List<String> options;
-    private int correctAnswerIndex;
+public class Main {
 
-    public Question(String questionText, List<String> options, int correctAnswerIndex) {
-        this.questionText = questionText;
-        this.options = options;
-        this.correctAnswerIndex = correctAnswerIndex;
-    }
-
-    public void displayQuestion() {
-        System.out.println(questionText);
-        for (int i = 0; i < options.size(); i++) {
-            System.out.println((i + 1) + ". " + options.get(i));
-        }
-    }
-
-    public boolean checkAnswer(int userAnswer) {
-        return userAnswer == correctAnswerIndex + 1;
-    }
-}
-
-class Quiz {
-    private String title;
-    private List<Question> questions;
-
-    public Quiz(String title) {
-        this.title = title;
-        this.questions = new ArrayList<>();
-    }
-
-    public void addQuestion(Question question) {
-        questions.add(question);
-    }
-
-    public void startQuiz() {
-        Scanner scanner = new Scanner(System.in);
-        int score = 0;
-
-        System.out.println("\nStarting Quiz: " + title);
-        for (Question q : questions) {
-            q.displayQuestion();
-            System.out.print("Enter your answer (1-4): ");
-            int answer = scanner.nextInt();
-
-            if (q.checkAnswer(answer)) {
-                System.out.println("Correct!\n");
-                score++;
-            } else {
-                System.out.println("Wrong answer!\n");
+    public static int findMin(int[] arr) {
+        int min = arr[0];
+        for (int num : arr) {
+            if (num < min) {
+                min = num;
             }
         }
-        System.out.println("Quiz completed! Your score: " + score + "/" + questions.size());
+        return min;
     }
-}
 
-public class Main {
-    public static void main(String[] args) {
-        Quiz quiz = new Quiz("Java Basics");
+    public static double findAverage(int[] arr) {
+        int sum = 0;
+        for (int num : arr) {
+            sum += num;
+        }
+        return (double) sum / arr.length;
+    }
 
-        List<String> options1 = Arrays.asList("int", "double", "char", "string");
-        List<String> options2 = Arrays.asList("class", "object", "method", "variable");
+    public static boolean isPrime(int n) {
+        if (n < 2) return false;
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
 
-        quiz.addQuestion(new Question("Which data type is used to store whole numbers?", options1, 0));
-        quiz.addQuestion(new Question("What is an instance of a class called?", options2, 1));
+    public static int factorial(int n) {
+        if (n == 0 || n == 1) return 1;
+        return n * factorial(n - 1);
+    }
 
-        quiz.startQuiz();
+    public static int fibonacci(int n) {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
+    public static int power(int a, int n) {
+        if (n == 0) return 1;
+        return a * power(a, n - 1);
+    }
+
+    public static void printReverse(int[] arr, int index) {
+        if (index < 0) return;
+        System.out.print(arr[index] + " ");
+        printReverse(arr, index - 1);
+    }
+
+
+    public static boolean isAllDigits(String s) {
+        for (char c : s.toCharArray()) {
+            if (!Character.isDigit(c)) return false;
+        }
+        return true;
+    }
+
+    public static int binomialCoeff(int n, int k) {
+        if (k == 0 || k == n) return 1;
+        return binomialCoeff(n - 1, k - 1) + binomialCoeff(n - 1, k);
+    }
+
+    public static int gcd(int a, int b) {
+        if (b == 0) return a;
+        return gcd(b, a % b);
     }
 }
